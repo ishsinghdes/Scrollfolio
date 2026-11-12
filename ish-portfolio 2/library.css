@@ -1,0 +1,86 @@
+/* Thin cardboard sleeves: project identity lives on the cover, not in separate controls. */
+.home-mac-template[hidden]{display:none!important}
+.home-stage{width:100%;height:100svh;min-height:660px;max-height:none;padding:0 0 40px;justify-content:center;gap:0;overflow:hidden}
+.sleeve-library{position:relative;flex:none;width:100%;height:280px;margin-top:100px;touch-action:pan-y;cursor:grab;isolation:isolate;perspective:1100px}
+.sleeve-track{position:absolute;inset:0;perspective:1100px;transform-style:flat}
+.sleeve{position:absolute;left:50%;top:50%;width:var(--sleeve-width,216px);height:var(--sleeve-height,233px);margin:0;padding:0;border:0;border-radius:4px;background:var(--sleeve-paper);color:var(--sleeve-ink);transform-style:flat;transform-origin:center;will-change:transform;cursor:pointer;box-shadow:1px 2px 0 color-mix(in srgb,var(--sleeve-paper),#111 20%),0 9px 12px -11px #0007;-webkit-tap-highlight-color:transparent;transition:none}
+.sleeve:active{scale:1}.sleeve:focus-visible{outline:2px solid var(--world-ink);outline-offset:5px}
+.sleeve-face{position:absolute;inset:0;display:block;overflow:hidden;border-radius:4px;background:linear-gradient(115deg,#ffffff09,#ffffff00 60%,#00000006);box-shadow:inset 1px 1px 0 #ffffff44,inset -1px -1px 0 #00000012;backface-visibility:hidden}
+.sleeve-face:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.1;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23888' filter='url(%23n)' opacity='.5' d='M0 0h160v160H0z'/%3E%3C/svg%3E")}
+.sleeve-label{position:absolute;top:13px;left:13px;right:13px;display:flex;align-items:center;gap:6px;min-height:22px;font-size:9px;font-weight:700;line-height:1.3;text-align:left}.sleeve-title{max-width:calc(100% - 22px)}.sleeve-icon{flex:none;display:grid;place-items:center;width:17px;height:19px;font-size:15px}.sleeve-icon img{width:17px;height:17px;object-fit:contain}.sleeve-picture{position:absolute;inset:48px 13px 15px;display:grid;place-items:center}.sleeve-picture img{display:block;width:100%;height:100%;object-fit:contain;border-radius:2px;pointer-events:none}.sleeve-greeting{display:none}.intro-sleeve .sleeve-label{top:16px;left:20px;font-size:15px;color:#3063ac}.intro-sleeve .sleeve-picture,.intro-sleeve .sleeve-icon{display:none}.intro-sleeve .sleeve-greeting{position:absolute;inset:66px 19px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:left;color:#191b20}.sleeve-greeting strong{font-size:25px;letter-spacing:-1.1px;line-height:1.2;white-space:nowrap}.sleeve-greeting>span{font-size:10px;line-height:1.7;max-width:150px}.intro-sleeve .sleeve-face:before{content:'';position:absolute;inset:12px;border:1px solid #3063ac55;border-radius:7px;pointer-events:none}
+.sleeve-library.library-dragging,.library-dragging .sleeve{cursor:grabbing}
+.home-stage .selected{width:min(430px,calc(100vw - 40px));min-height:165px;margin-top:40px;text-align:center}.home-stage .selected h1{max-width:none;font-size:19px;line-height:1.45}.home-stage .project-summary{width:100%;height:auto;min-height:4.95em;font-size:11px;line-height:1.8}.home-stage #open-project{max-width:100%;padding:6px 0}.library-intro .home-stage .selected h1{font-size:17px}.library-intro .home-stage .project-summary{min-height:0;margin-top:8px}.library-intro .home-stage .tags{display:none}.library-intro .home-stage .selected{min-height:165px}
+/* Two shallow tonal washes drift without shifting project identity or text contrast. */
+#atmosphere{background:linear-gradient(135deg,var(--world-bg),var(--world-wash,var(--world-bg)))}
+#atmosphere:before{inset:-15%;opacity:1;background:radial-gradient(ellipse at 20% 30%,color-mix(in srgb,var(--world-accent) 7%,transparent),transparent 60%),radial-gradient(ellipse at 80% 75%,#ffffff09,transparent 62%);animation:library-wash 24s ease-in-out infinite alternate}
+.library-intro #atmosphere:before{background:radial-gradient(ellipse at 25% 25%,#dfebfb70,transparent 65%),radial-gradient(ellipse at 80% 70%,#f0f5fc,transparent 65%)}
+@keyframes library-wash{to{transform:translate(5%,3%) scale(1.07)}}
+.project-open main{opacity:0;transform:none;filter:none}.project-open header{opacity:0;pointer-events:none}
+.library-opening .sleeve{opacity:0!important;transition:opacity .35s}.library-opening .selected,.library-opening header,.library-opening #wolfy{opacity:0;transition:opacity .3s}.project-arriving .canvas-world{animation:gallery-materialize .55s ease both}@keyframes gallery-materialize{from{opacity:0}to{opacity:1}}
+@media(max-width:599px){.home-stage{min-height:650px}.sleeve-library{margin-top:55px;height:260px;perspective:900px}.home-stage .selected{margin-top:28px;width:calc(100vw - 48px)}.home-stage .selected h1{font-size:17px}.library-intro .home-stage .selected h1{font-size:15px}.sleeve-track{perspective:900px}}
+@media(min-width:1800px){.sleeve-track{perspective:1800px}}
+@media(prefers-reduced-motion:reduce){#atmosphere:before{animation:none}.sleeve,.selected{transition:none!important}.project-arriving .canvas-world{animation:none}}
+
+.sleeve-face,.sleeve-face *{pointer-events:none}
+
+/* Retain the original word-by-word glitter intro before the library arrives. */
+.js:not(.intro-done) .sleeve-library,.js:not(.intro-done) .home-stage>.selected{opacity:0;visibility:hidden;pointer-events:none}
+.intro-done .sleeve-library{animation:library-arrive .75s cubic-bezier(.2,.7,.2,1) both}
+.intro-done .home-stage>.selected{animation:library-copy-arrive .65s .15s ease both}
+@keyframes library-arrive{from{opacity:0}to{opacity:1}}
+@keyframes library-copy-arrive{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.intro-done .sleeve-library,.intro-done .home-stage>.selected{animation:none}}
+.js .boot{display:block!important}
+
+/* A consistent Bharat Crypto cover aperture, regardless of source aspect ratio. */
+.sleeve-picture img{height:auto;aspect-ratio:1474/1120;object-fit:cover;object-position:center;max-height:100%}
+.intro-sleeve .sleeve-greeting{inset:auto 22px 26px;display:block;text-align:right}
+.intro-sleeve .sleeve-greeting>span{display:block;margin-left:auto;font-size:11px;max-width:150px}
+
+.js:not(.intro-done) header{opacity:0!important;animation:none!important;pointer-events:none}
+.intro-done header{animation:header-after-library .65s .8s ease both!important}
+@keyframes header-after-library{from{opacity:0}to{opacity:1}}
+.project-open header{animation:none!important;opacity:0!important;pointer-events:none}
+#atmosphere:before{background:radial-gradient(ellipse at 20% 30%,color-mix(in srgb,var(--world-accent) 10%,transparent),transparent 65%),radial-gradient(ellipse at 80% 75%,#ffffff0d,transparent 65%)}
+@media(prefers-reduced-motion:reduce){.intro-done header{animation:none!important;opacity:1}}
+
+.library-opening .selected,.library-opening header,.library-opening #wolfy{animation:none!important;opacity:0!important;transition:opacity .3s}
+
+/* Opaque, independently stacked sleeves prevent intersecting planes and see-through covers. */
+.intro-sentence{font-weight:500}
+.library-entering{pointer-events:none}
+.sleeve-sticker-layer{position:absolute;inset:0;z-index:2;pointer-events:none}
+.sleeve-sticker-layer .sleeve-sticker{width:13%;height:auto;aspect-ratio:1;transform:translate(-50%,-50%) rotate(var(--sticker-rotation));filter:drop-shadow(0 1px 1px #0002);pointer-events:none}
+.sleeve-sticker-layer .sticker-wolf{aspect-ratio:192/208}
+.sleeve-label{z-index:3}
+
+/* The sleeves themselves are the loading screen: fast scroll, deceleration, then artwork. */
+.sleeve-track{perspective-origin:50% calc(50% + var(--sleeve-height)/2)}
+.intro-done .sleeve-library{animation:none}
+.js:not(.intro-done) body.library-loading .sleeve-library{opacity:1;visibility:visible;pointer-events:none}
+.sleeve-loading-surface{position:absolute;inset:0;z-index:6;border-radius:4px;pointer-events:none;opacity:0;transition:opacity .7s ease;background:linear-gradient(105deg,#dcdfe3 30%,#f2f3f5 48%,#dcdfe3 66%);background-size:250% 100%}
+.library-loading .sleeve-loading-surface{opacity:1;transition:none;animation:sleeve-loading-flash .65s ease-in-out infinite}
+@keyframes sleeve-loading-flash{from{background-position:140% 0}to{background-position:-50% 0}}
+.library-intro .home-stage>.selected{visibility:hidden;pointer-events:none}
+.intro-sleeve .sleeve-face:after{z-index:4;opacity:0;background:linear-gradient(112deg,transparent 38%,#ffffff25 44%,#ffffffb0 49%,#ffffff20 55%,transparent 62%);background-size:300% 100%;animation:intro-card-shine 7s ease-in-out infinite}
+@keyframes intro-card-shine{0%,76%{opacity:0;background-position:150% 0}82%{opacity:.55;background-position:150% 0}96%{opacity:.55;background-position:-50% 0}100%{opacity:0;background-position:-50% 0}}
+.education>.education-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:18px;padding:16px 0}
+.education>.education-row>.education-label{display:flex;flex-direction:column;gap:7px;min-width:0}
+.education-label strong{font-size:12px;line-height:1.6}.education-label>span{font-size:11px;line-height:1.7;color:var(--muted)}
+.education>.education-row>time{font-size:10px;line-height:1.6;white-space:nowrap;display:block;align-self:baseline;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){.sleeve-loading-surface{display:none}.intro-sleeve .sleeve-face:after{animation:none}}
+
+/* Neutral loading edges and shadows: no project colour can leak below the grey masks. */
+.library-loading .sleeve{background:#d3d6da!important;filter:grayscale(1);box-shadow:1px 2px 0 #999fa7,0 9px 12px -11px #0005!important}
+.library-loading .sleeve-loading-surface{background:linear-gradient(105deg,var(--loading-tone) 30%,color-mix(in srgb,var(--loading-tone) 78%,white) 48%,var(--loading-tone) 66%);background-size:250% 100%}
+.library-intro .home-stage>.selected{visibility:visible;pointer-events:auto}
+.library-intro .home-stage .project-summary{min-height:0;max-width:370px;margin:8px auto 0}
+.library-intro .project-summary a{text-decoration:underline;text-underline-offset:3px}
+
+/* Menu education spans the same full row as experience; dates share its right edge. */
+#menu-education .education>.education-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:baseline;padding:22px 5px}
+#menu-education .education>.education-row>.education-label{padding:0;display:flex;flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap}
+#menu-education .education-label strong{font-size:11px;line-height:1.6;white-space:nowrap;color:#f4f4ef}
+#menu-education .education-label>span{font-size:10px;line-height:1.6;color:#bebeb9}
+#menu-education .education>.education-row>time{padding:0;font-size:9px;line-height:1.6;justify-self:end;color:#bebeb9;white-space:nowrap}
+@media(max-width:600px){#menu-education .education>.education-row>.education-label{flex-direction:column;gap:6px}#menu-education .education>.education-row{column-gap:12px}}
