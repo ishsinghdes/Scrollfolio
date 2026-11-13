@@ -65,3 +65,11 @@ body{transition:none}#atmosphere{transition:none}.resume-section h2,.resume-sect
  .phone-check-flat .project-sticker,.phone-check-flat .project-sticker *, .phone-check-flat .sleeve,.phone-check-flat .sleeve-face,.phone-check-flat .v2-top,.phone-check-flat .journey-nav,.phone-check-flat .project-link-trigger{filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;will-change:auto!important}
  .phone-check-flat .sticker-art:after,.phone-check-flat .sleeve-face:after{display:none!important}
 }
+
+/* Mobile touch is handled by the browser's native two-axis momentum scroller.
+   Desktop pointer panning still uses the original transformed canvas. */
+@media(max-width:759px),(hover:none) and (pointer:coarse){
+ .canvas-viewport{overflow:auto;touch-action:pan-x pan-y pinch-zoom;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto}
+ .canvas-viewport::-webkit-scrollbar{display:none}
+ .canvas-world{position:relative;transform:none!important}
+}
