@@ -162,6 +162,8 @@ if(!reducedMotion.matches&&!document.documentElement.classList.contains('intro-d
  libraryEntering=true;library.classList.add('library-entering');libraryPosition=-6;libraryTarget=0;commitLibraryEntry(0);sizeLibrary();
  const began=performance.now();
  function loadingScroll(now){
+  // A project route takes ownership of the screen; never finish the intro over it.
+  if(projectDialog.open){libraryPosition=libraryTarget=selected+1;libraryEntering=false;library.classList.remove('library-entering');paintLibrary();document.body.classList.remove('library-loading');finishLanding();return;}
   const progress=Math.min(1,(now-began)/1200);libraryPosition=-6*(1-progress)**4;paintLibrary();
   if(progress<1){requestAnimationFrame(loadingScroll);return;}
   libraryPosition=libraryTarget=0;libraryEntering=false;library.classList.remove('library-entering');paintLibrary();
