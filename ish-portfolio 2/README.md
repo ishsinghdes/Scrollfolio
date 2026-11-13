@@ -11,3 +11,6 @@ Project stickers can be dragged during the visit and reset when the project is r
 The project Return Mac leads back to the library. Focused media closes to the original canvas location. The tab and sharing title remain Portfolio & Works.
 
 For the existing deployment, preserve the folder name `ish-portfolio 2`. Its original hosting root remains this folder. For GitHub Pages, publish this folder’s contents as the selected static-site root. A local preview may be run using any static web server.
+
+
+Scrollfolio — Vercel production deployment update.
