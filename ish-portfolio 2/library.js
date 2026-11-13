@@ -25,7 +25,7 @@ function setSleeveArtwork(b,n){
  const icon=b.querySelector('.sleeve-icon'),picture=b.querySelector('.sleeve-picture');icon.replaceChildren();picture.replaceChildren();
  if(p){
   if(p.iconAsset){const im=new Image();im.src=p.iconAsset;im.alt='';im.draggable=false;icon.append(im);}else icon.textContent=p.icon;
-  const image=new Image();image.src=p.sleeveHero||p.hero;image.alt='';image.draggable=false;image.decoding='async';picture.append(image);
+  const image=new Image();image.src=window.portfolioImageSource(p.sleeveHero||p.hero,'thumb');image.alt='';image.draggable=false;image.decoding='async';picture.append(image);
  }
  b.querySelector('.sleeve-greeting').replaceChildren();
  if(!p){const sub=document.createElement('span');sub.textContent='Scroll through my projects.';b.querySelector('.sleeve-greeting').append(sub);}
@@ -63,7 +63,7 @@ function paintLibrary(){
   setSleeveArtwork(b,n);
   const x=.74*(a<1?d*sleeveWidth*.83:sign*(sleeveWidth*.83+step*Math.pow(a-1,.78)));
   const angle=-sign*Math.min(72,a*52),scale=(1-Math.min(.30,a*.085))*(1-.2*Math.min(1,a)**2*(3-2*Math.min(1,a))),z=-Math.min(110,a*23);
-  b.style.transform=`translate(-50%,-50%) translate3d(${x}px,${sleeveHeight*(1-scale)/2}px,${z}px) rotateY(${angle}deg) scale(${scale})`;
+  b.style.transform=mobileExperience.matches&&window.PORTFOLIO_PHONE_CHECK?.flat?`translate(-50%,-50%) translate(${x}px,${sleeveHeight*(1-scale)/2}px) scale(${scale})`:`translate(-50%,-50%) translate3d(${x}px,${sleeveHeight*(1-scale)/2}px,${z}px) rotateY(${angle}deg) scale(${scale})`;
   b.style.zIndex=String(10000-Math.round(a*1000)+(absolute===center?1:0));const edge=Math.max(0,Math.min(1,(5.65-a)/.65));b.style.opacity=String(edge*(libraryEntering?Math.max(.24,1-a*.14):1));const grey=Math.round(174+Math.min(5,a)*11);b.style.setProperty('--loading-tone',`rgb(${grey},${grey},${grey})`);
   const active=n===wrapEntry(center);b.classList.toggle('sleeve-selected',active);b.tabIndex=active?0:-1;b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-hidden',String(a>5.65));b.style.pointerEvents=a>5.65?'none':'';
   b.setAttribute('aria-label',libraryEntries[n]?`${active?'Open':'Select'} ${libraryEntries[n].name}`:`${active?'About':'Select'} Ish Singh`);
@@ -162,6 +162,8 @@ if(!reducedMotion.matches&&!document.documentElement.classList.contains('intro-d
  libraryEntering=true;library.classList.add('library-entering');libraryPosition=-6;libraryTarget=0;commitLibraryEntry(0);sizeLibrary();
  const began=performance.now();
  function loadingScroll(now){
+  // A project route takes ownership of the screen; never finish the intro over it.
+  if(projectDialog.open){libraryPosition=libraryTarget=selected+1;libraryEntering=false;library.classList.remove('library-entering');paintLibrary();document.body.classList.remove('library-loading');finishLanding();return;}
   const progress=Math.min(1,(now-began)/1200);libraryPosition=-6*(1-progress)**4;paintLibrary();
   if(progress<1){requestAnimationFrame(loadingScroll);return;}
   libraryPosition=libraryTarget=0;libraryEntering=false;library.classList.remove('library-entering');paintLibrary();
@@ -181,3 +183,6 @@ function maybeMentionStickers(now=performance.now()){
  speakWolfie(lines[stickerHintTurn++%lines.length]);stickerHintAfter=now+75000;return true;
 }
 setInterval(()=>maybeMentionStickers(),6000);
+
+// Refresh sources when a device changes between desktop and mobile presentation.
+window.addEventListener('portfolio:media-mode',()=>{sleeves.forEach(b=>delete b.dataset.entry);paintLibrary();});

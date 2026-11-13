@@ -51,9 +51,10 @@ function startProjectSummary(project){
 function drawPreview(p){
   const canvas=$('preview'),ctx=canvas.getContext('2d');ctx.clearRect(0,0,88,66);
   if(!p.hero)return;
+  const previewSource=window.portfolioImageSource(p.hero,'thumb');
   const paint=img=>{if(projects[selected]!==p)return;ctx.clearRect(0,0,88,66);const ratio=Math.max(88/img.width,66/img.height);ctx.drawImage(img,(88-img.width*ratio)/2,(66-img.height*ratio)/2,img.width*ratio,img.height*ratio);};
-  if(imageCache.has(p.hero)){paint(imageCache.get(p.hero));return;}
-  const img=new Image();img.onload=()=>{imageCache.set(p.hero,img);paint(img);};img.src=p.hero;
+  if(imageCache.has(previewSource)){paint(imageCache.get(previewSource));return;}
+  const img=new Image();img.decoding='async';img.onload=()=>{imageCache.set(previewSource,img);while(imageCache.size>3)imageCache.delete(imageCache.keys().next().value);paint(img);};img.src=previewSource;
 }
 function infoRow(label,value){const row=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;row.append(dt,dd);return row;}
 function openProject(pushRoute=true){
@@ -125,7 +126,7 @@ function finishLanding(){
 if(reducedMotion.matches||location.hash.startsWith('#project/'))finishLanding();
 else document.body.classList.add('library-loading');
 // Reveal text once as it enters view; retain complete text for assistive technology.
-if(!reducedMotion.matches && 'IntersectionObserver' in window){
+if(!reducedMotion.matches && !window.PORTFOLIO_MOBILE_QUERY.matches && 'IntersectionObserver' in window){
  const pending=new Map();
  const typingObserver=new IntersectionObserver(entries=>{
   for(const entry of entries){
