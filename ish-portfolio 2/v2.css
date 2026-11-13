@@ -27,3 +27,24 @@ body{transition:none}#atmosphere{transition:none}.resume-section h2,.resume-sect
 
 /* A stable pointer target prevents perspective motion from cancelling hover. */
 .canvas-tile:not(.canvas-empty){transform:none!important;transition:none;will-change:auto;transform-style:flat}.tile-surface{display:block;position:relative;width:100%;height:100%;pointer-events:none;transform:perspective(900px) translate3d(var(--hover-x,0px),var(--hover-y,0px),0) rotateX(var(--hover-rx,0deg)) rotateY(var(--hover-ry,0deg));transition:transform .18s cubic-bezier(.2,.7,.3,1);will-change:transform}.tile-surface .tile-caption{top:100%;left:0;right:0}@media(prefers-reduced-motion:reduce){.tile-surface{transform:none!important;transition:none!important}}
+
+/* Mobile keeps the portfolio artwork, with a bounded media working set and no project star field. */
+.mobile-media-state,.mobile-play-cue{display:none}
+.media-retry{position:absolute;inset:0;display:grid;place-items:center;background:var(--world-bg);color:var(--world-ink);font:inherit;padding:20px}
+@media(max-width:759px),(hover:none) and (pointer:coarse){
+ .project-open #matrix{display:none!important}
+ .project-open #atmosphere:before{animation:none}
+ .canvas-world{transform-style:flat}
+ .tile-surface{transform:none!important;transition:none;will-change:auto}
+ .canvas-tile img:not([src]){visibility:hidden}
+ .mobile-media-state{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-size:12px;line-height:1.5;padding:16px;color:var(--world-ink)}
+ .canvas-tile[data-media-state="loading"] .mobile-media-state:after{content:'Loading…'}
+ .canvas-tile[data-media-state="error"] .mobile-media-state{background:var(--world-bg)}
+ .canvas-tile[data-media-state="error"] .mobile-media-state:after{content:'Couldn’t load. Tap to retry'}
+ .mobile-play-cue{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#000a;color:white;pointer-events:none;font-size:17px}
+ .canvas-tile[data-playing="true"] .mobile-play-cue{display:none}
+ .wolfy-sprite{background-image:url('assets/mobile/decor/wolfy-spritesheet.webp')}
+ .v2-gallery{min-height:0}
+}
+
+.focused-frame{position:relative}

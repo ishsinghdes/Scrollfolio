@@ -25,9 +25,9 @@ function stickerSeed(id){return [...id].reduce((value,char)=>(value*31+char.char
 function stickerElement(key,mini=false){
  const el=document.createElement('span');el.className='project-sticker'+(mini?' mac-sticker':'');el.dataset.sticker=key;if(mini)el.setAttribute('aria-hidden','true');else{el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Move sticker; double-click or press Enter to collect it');}
  if(key[0]==='W'){
-  const variant=Number(key.slice(1));el.classList.add('sticker-wolf');el.style.backgroundImage='url("assets/wolfy-spritesheet.png")';el.style.backgroundSize='800% 1100%';el.style.backgroundPosition=variant===1?'0% 50%':variant===2?'28.5714% 30%':'0% 0%';
+  const variant=Number(key.slice(1));el.classList.add('sticker-wolf');el.style.backgroundImage=`url("${window.portfolioImageSource('assets/wolfy-spritesheet.png','tile')}")`;el.style.backgroundSize='800% 1100%';el.style.backgroundPosition=variant===1?'0% 50%':variant===2?'28.5714% 30%':'0% 0%';
  }else{
-  const index=Number(key.slice(1));el.style.backgroundImage=`url("${STICKER_ATLASES[key[0]]}")`;el.style.backgroundSize='400% 400%';el.style.backgroundPosition=`${index%4/3*100}% ${Math.floor(index/4)/3*100}%`;
+  const index=Number(key.slice(1));el.style.backgroundImage=`url("${window.portfolioImageSource(STICKER_ATLASES[key[0]],'tile')}")`;el.style.backgroundSize='400% 400%';el.style.backgroundPosition=`${index%4/3*100}% ${Math.floor(index/4)/3*100}%`;
  }
  const art=document.createElement('span');art.className='sticker-art';
  el.style.setProperty('--sticker-image',el.style.backgroundImage);el.style.setProperty('--sticker-bg-size',el.style.backgroundSize);el.style.setProperty('--sticker-bg-position',el.style.backgroundPosition);el.style.backgroundImage='none';el.append(art);
@@ -45,7 +45,7 @@ function renderProjectStickers(project,world){
  const seed=stickerSeed(project.id),tiles=[...world.querySelectorAll('.canvas-tile:not(.canvas-empty)')];
  const layer=document.createElement('div');layer.className='canvas-sticker-layer';layer.setAttribute('aria-label','Moveable project stickers');
  const accents=set.slice(0,Math.min(set.length,tiles.length*2)).map((key,i)=>{
-  const el=stickerElement(key);const size=key[0]==='P'?84+(seed+i*7)%23:80+(seed+i*13)%33;
+  const el=stickerElement(key);const size=(key[0]==='P'?84+(seed+i*7)%23:80+(seed+i*13)%33)*(Number(world.dataset.mediaScale)||1);
   el.style.width=size+'px';el.style.height=size+'px';el.style.setProperty('--sticker-rotation',`${((seed+i*17)%27)-13}deg`);
   layer.append(el);return {el,size};
  });
@@ -63,7 +63,7 @@ function renderProjectStickers(project,world){
     else if(mode===1){x=left-size*.78;y=top+height*.46-size*.5;}
     else{x=left+width-size*.2;y=top+height-size*.76;}
    }else{x=12;y=14;}
-   el.style.left=Math.max(12,Math.min(1815-size,x))+'px';el.style.top=Math.max(14,Math.min(world.offsetHeight-size-16,y))+'px';
+   el.style.left=Math.max(12,Math.min(world.offsetWidth-size-12,x))+'px';el.style.top=Math.max(14,Math.min(world.offsetHeight-size-16,y))+'px';
   });
  }
  tiles.forEach(tile=>{const media=tile.querySelector('img,video');media.addEventListener(media.tagName==='VIDEO'?'loadedmetadata':'load',arrange,{once:true});});

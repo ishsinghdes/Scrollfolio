@@ -25,7 +25,7 @@ function setSleeveArtwork(b,n){
  const icon=b.querySelector('.sleeve-icon'),picture=b.querySelector('.sleeve-picture');icon.replaceChildren();picture.replaceChildren();
  if(p){
   if(p.iconAsset){const im=new Image();im.src=p.iconAsset;im.alt='';im.draggable=false;icon.append(im);}else icon.textContent=p.icon;
-  const image=new Image();image.src=p.sleeveHero||p.hero;image.alt='';image.draggable=false;image.decoding='async';picture.append(image);
+  const image=new Image();image.src=window.portfolioImageSource(p.sleeveHero||p.hero,'thumb');image.alt='';image.draggable=false;image.decoding='async';picture.append(image);
  }
  b.querySelector('.sleeve-greeting').replaceChildren();
  if(!p){const sub=document.createElement('span');sub.textContent='Scroll through my projects.';b.querySelector('.sleeve-greeting').append(sub);}
@@ -181,3 +181,6 @@ function maybeMentionStickers(now=performance.now()){
  speakWolfie(lines[stickerHintTurn++%lines.length]);stickerHintAfter=now+75000;return true;
 }
 setInterval(()=>maybeMentionStickers(),6000);
+
+// Refresh sources when a device changes between desktop and mobile presentation.
+window.addEventListener('portfolio:media-mode',()=>{sleeves.forEach(b=>delete b.dataset.entry);paintLibrary();});
