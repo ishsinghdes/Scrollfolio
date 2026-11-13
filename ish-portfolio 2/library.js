@@ -63,7 +63,7 @@ function paintLibrary(){
   setSleeveArtwork(b,n);
   const x=.74*(a<1?d*sleeveWidth*.83:sign*(sleeveWidth*.83+step*Math.pow(a-1,.78)));
   const angle=-sign*Math.min(72,a*52),scale=(1-Math.min(.30,a*.085))*(1-.2*Math.min(1,a)**2*(3-2*Math.min(1,a))),z=-Math.min(110,a*23);
-  b.style.transform=`translate(-50%,-50%) translate3d(${x}px,${sleeveHeight*(1-scale)/2}px,${z}px) rotateY(${angle}deg) scale(${scale})`;
+  b.style.transform=mobileExperience.matches&&window.PORTFOLIO_PHONE_CHECK?.flat?`translate(-50%,-50%) translate(${x}px,${sleeveHeight*(1-scale)/2}px) scale(${scale})`:`translate(-50%,-50%) translate3d(${x}px,${sleeveHeight*(1-scale)/2}px,${z}px) rotateY(${angle}deg) scale(${scale})`;
   b.style.zIndex=String(10000-Math.round(a*1000)+(absolute===center?1:0));const edge=Math.max(0,Math.min(1,(5.65-a)/.65));b.style.opacity=String(edge*(libraryEntering?Math.max(.24,1-a*.14):1));const grey=Math.round(174+Math.min(5,a)*11);b.style.setProperty('--loading-tone',`rgb(${grey},${grey},${grey})`);
   const active=n===wrapEntry(center);b.classList.toggle('sleeve-selected',active);b.tabIndex=active?0:-1;b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-hidden',String(a>5.65));b.style.pointerEvents=a>5.65?'none':'';
   b.setAttribute('aria-label',libraryEntries[n]?`${active?'Open':'Select'} ${libraryEntries[n].name}`:`${active?'About':'Select'} Ish Singh`);

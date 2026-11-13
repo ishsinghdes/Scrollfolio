@@ -61,7 +61,7 @@ window.addEventListener('pointermove',e=>{
 },{passive:true});
 document.addEventListener('pointerleave',()=>fieldPointer.inside=false);
 function sizeMatrix(){
- if(mobileExperience.matches&&projectDialog.open){matrix.hidden=true;matrix.width=matrix.height=1;dots=[];shootingStars=[];return;}
+ if(mobileExperience.matches&&(projectDialog.open||window.PORTFOLIO_PHONE_CHECK?.flat)){matrix.hidden=true;matrix.width=matrix.height=1;dots=[];shootingStars=[];return;}
  matrix.hidden=false;
  const scale=Math.min(devicePixelRatio||1,2,3840/innerWidth);matrixWidth=innerWidth;matrixHeight=innerHeight;
  matrix.width=Math.round(innerWidth*scale);matrix.height=Math.round(innerHeight*scale);matrixContext.setTransform(scale,0,0,scale,0,0);
@@ -72,7 +72,7 @@ function sizeMatrix(){
  shootingStars=[];renderMatrix(performance.now(),true);
 }
 function renderMatrix(now,once=false){
- if(document.hidden||(mobileExperience.matches&&projectDialog.open)){themeFrame=0;return;}
+ if(document.hidden||(mobileExperience.matches&&(projectDialog.open||window.PORTFOLIO_PHONE_CHECK?.flat))){themeFrame=0;return;}
  if(now-lastMatrix<28&&!once){themeFrame=requestAnimationFrame(renderMatrix);return;}
  const dt=Math.min(2,(now-lastMatrix)/28||1);lastMatrix=now;
  const ctx=matrixContext,time=now/1000,reduced=reducedMotion.matches;
@@ -110,7 +110,7 @@ function renderMatrix(now,once=false){
  ctx.globalAlpha=1;
  if(!once&&!reduced&&!document.hidden)themeFrame=requestAnimationFrame(renderMatrix);
 }
-window.addEventListener('resize',sizeMatrix);
+let matrixResizeTimer=0;window.addEventListener('resize',()=>{clearTimeout(matrixResizeTimer);matrixResizeTimer=setTimeout(sizeMatrix,150);});
 function syncMatrixState(){cancelAnimationFrame(themeFrame);themeFrame=0;sizeMatrix();if(!document.hidden&&!reducedMotion.matches)renderMatrix(performance.now());}
 document.addEventListener('visibilitychange',syncMatrixState);
 reducedMotion.addEventListener('change',syncMatrixState);
@@ -138,7 +138,7 @@ const positions=[
 ];
 const worldSize={width:1850,height:2180};
 function placeWorld(){if(mobileExperience.matches){cancelAnimationFrame(worldPlacementFrame);worldPlacementFrame=requestAnimationFrame(paintWorld);}else paintWorld();}
-function paintWorld(){worldPlacementFrame=0;const centerX=(viewport.clientWidth-worldSize.width)/2,centerY=(viewport.clientHeight-worldSize.height)/2;pan.x=centerX>0?centerX:Math.min(40,Math.max(viewport.clientWidth-worldSize.width-40,pan.x));pan.y=centerY>0?centerY:Math.min(40,Math.max(viewport.clientHeight-worldSize.height-40,pan.y));world.style.transform=`translate3d(${pan.x}px,${pan.y}px,0)`;if(currentProject)panMemory.set(currentProject.id,{...pan,scale:Number(world.dataset.mediaScale)||1});mobileGallery.schedule();}
+function paintWorld(){worldPlacementFrame=0;const centerX=(viewport.clientWidth-worldSize.width)/2,centerY=(viewport.clientHeight-worldSize.height)/2;pan.x=centerX>0?centerX:Math.min(40,Math.max(viewport.clientWidth-worldSize.width-40,pan.x));pan.y=centerY>0?centerY:Math.min(40,Math.max(viewport.clientHeight-worldSize.height-40,pan.y));world.style.transform=mobileExperience.matches?`translate(${pan.x}px,${pan.y}px)`:`translate3d(${pan.x}px,${pan.y}px,0)`;if(currentProject)panMemory.set(currentProject.id,{...pan,scale:Number(world.dataset.mediaScale)||1});mobileGallery.schedule();}
 let canvasBoundsFrame=0;
 function updateCanvasBounds(){
  cancelAnimationFrame(canvasBoundsFrame);canvasBoundsFrame=requestAnimationFrame(()=>{
@@ -391,6 +391,6 @@ mobileExperience.addEventListener('change',()=>{
  imageCache.clear();syncMatrixState();if(projectDialog.open&&currentProject){closeFocus();renderCanvas(currentProject);setActiveSection(projectDialog.querySelector('.journey-nav .active')?.dataset.section||'gallery');}
  drawPreview(projects[selected]);decorateProjectMac(projects[selected],returnMac);window.dispatchEvent(new Event('portfolio:media-mode'));
 });
-window.addEventListener('resize',()=>{
- if(mobileExperience.matches&&projectDialog.open&&viewport.clientWidth!==mobileGalleryWidth){mobileGalleryWidth=viewport.clientWidth;closeFocus();renderCanvas(currentProject);}
+let galleryResizeTimer=0;window.addEventListener('resize',()=>{
+ clearTimeout(galleryResizeTimer);galleryResizeTimer=setTimeout(()=>{if(mobileExperience.matches&&projectDialog.open&&Math.abs(viewport.clientWidth-mobileGalleryWidth)>2){mobileGalleryWidth=viewport.clientWidth;closeFocus();renderCanvas(currentProject);}},200);
 });

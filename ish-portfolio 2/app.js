@@ -126,7 +126,7 @@ function finishLanding(){
 if(reducedMotion.matches||location.hash.startsWith('#project/'))finishLanding();
 else document.body.classList.add('library-loading');
 // Reveal text once as it enters view; retain complete text for assistive technology.
-if(!reducedMotion.matches && 'IntersectionObserver' in window){
+if(!reducedMotion.matches && !window.PORTFOLIO_MOBILE_QUERY.matches && 'IntersectionObserver' in window){
  const pending=new Map();
  const typingObserver=new IntersectionObserver(entries=>{
   for(const entry of entries){

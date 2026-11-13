@@ -7,18 +7,18 @@ window.PortfolioMobileGallery=class {
   this.clear();
   this.entries=[...this.world.querySelectorAll('.canvas-tile')].flatMap(tile=>{
    const media=tile.querySelector('img,video');if(!media?.dataset.mobileSrc)return [];
-   const ready=()=>{if(media.isConnected&&media.hasAttribute('src'))tile.dataset.mediaState='ready';};
-   const error=()=>{if(media.isConnected&&media.hasAttribute('src'))tile.dataset.mediaState='error';};
+   const ready=()=>{if(media.isConnected&&media.hasAttribute('src')){tile.dataset.mediaState='ready';clearTimeout(this.entries.find(e=>e.media===media)?.timer);this.schedule();}};
+   const error=()=>{if(media.isConnected&&media.hasAttribute('src')){tile.dataset.mediaState='error';clearTimeout(this.entries.find(e=>e.media===media)?.timer);this.schedule();}};
    const playing=()=>tile.dataset.playing='true',paused=()=>delete tile.dataset.playing;
-   media.addEventListener('load',ready);media.addEventListener('loadeddata',ready);media.addEventListener('error',error);
+   media.addEventListener('loadedmetadata',ready);media.addEventListener('load',ready);media.addEventListener('loadeddata',ready);media.addEventListener('error',error);
    media.addEventListener('playing',playing);media.addEventListener('pause',paused);
-   return [{tile,media,ready,error,playing,paused}];
+   const entry={tile,media,ready,error,playing,paused,timer:0};return [entry];
   });
   this.schedule();
  }
  schedule(){if(!this.frame)this.frame=requestAnimationFrame(()=>{this.frame=0;this.refresh();});}
  release(entry){
-  const {media,tile}=entry;
+  const {media,tile}=entry;clearTimeout(entry.timer);entry.timer=0;
   if(media.tagName==='VIDEO'){
    media.pause();media.autoplay=false;
    if(media.hasAttribute('src')){media.removeAttribute('src');media.load();}
@@ -30,7 +30,7 @@ window.PortfolioMobileGallery=class {
   cancelAnimationFrame(this.frame);this.frame=0;
   for(const entry of this.entries){
    this.release(entry);const {media,ready,error,playing,paused}=entry;
-   media.removeEventListener('load',ready);media.removeEventListener('loadeddata',ready);media.removeEventListener('error',error);
+   media.removeEventListener('loadedmetadata',ready);media.removeEventListener('load',ready);media.removeEventListener('loadeddata',ready);media.removeEventListener('error',error);
    media.removeEventListener('playing',playing);media.removeEventListener('pause',paused);
   }
   this.entries=[];
@@ -54,21 +54,28 @@ window.PortfolioMobileGallery=class {
    const distance=Math.hypot(r.left+r.width/2-camera.left-camera.width/2,r.top+r.height/2-camera.top-camera.height/2);
    return {...entry,visible,near,distance};
   });
-  const wanted=new Set(measured.filter(e=>e.near).sort((a,b)=>b.visible-a.visible||a.distance-b.distance).slice(0,6).map(e=>e.media));
+  const wanted=new Set(measured.filter(e=>e.near).sort((a,b)=>b.visible-a.visible||a.distance-b.distance).slice(0,window.PORTFOLIO_PHONE_CHECK?.single?1:4).map(e=>e.media));
   const clip=this.motion.matches?null:measured.filter(e=>e.media.tagName==='VIDEO'&&e.visible>80).sort((a,b)=>b.visible-a.visible)[0]?.media;
   // Release old work before starting the next image/video.
   for(const entry of measured){
    if(!wanted.has(entry.media)||(entry.media.tagName==='VIDEO'&&entry.media!==clip))this.release(entry);
    if(entry.media.tagName==='VIDEO'&&!wanted.has(entry.media))entry.media.removeAttribute('poster');
   }
-  for(const entry of measured){
+  let pending=this.entries.filter(e=>e.media.tagName==='IMG'&&e.media.hasAttribute('src')&&e.tile.dataset.mediaState==='loading').length;
+  for(const entry of measured.sort((a,b)=>b.visible-a.visible||a.distance-b.distance)){
    const {media,tile}=entry;if(!wanted.has(media))continue;
    if(media.tagName==='VIDEO'){
     if(media.dataset.mobilePoster&&!media.hasAttribute('poster'))media.poster=media.dataset.mobilePoster;
     if(media!==clip)continue;
     if(!media.hasAttribute('src')){tile.dataset.mediaState='loading';media.preload='metadata';media.autoplay=true;media.src=media.dataset.mobileSrc;}
     if(!media.dataset.autoplayAttempted){media.dataset.autoplayAttempted='true';media.play().catch(()=>{if(media.isConnected)delete tile.dataset.playing;});}
-   }else if(!media.hasAttribute('src')){tile.dataset.mediaState='loading';media.src=media.dataset.mobileSrc;}
+   }else if(!media.hasAttribute('src')){
+    if(pending>=2){tile.dataset.mediaState='waiting';continue;}
+    pending++;tile.dataset.mediaState='loading';media.src=media.dataset.mobileSrc;
+    const tracked=this.entries.find(e=>e.media===media);
+    tracked.timer=setTimeout(()=>{if(media.hasAttribute('src')&&tile.dataset.mediaState==='loading')tracked.error();},20000);
+    if(media.complete&&media.naturalWidth>0)tracked.ready();
+   }
   }
  }
 };

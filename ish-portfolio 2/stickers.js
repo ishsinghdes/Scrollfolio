@@ -24,7 +24,9 @@ const PROJECT_STICKER_SETS={
 function stickerSeed(id){return [...id].reduce((value,char)=>(value*31+char.charCodeAt(0))>>>0,7);}
 function stickerElement(key,mini=false){
  const el=document.createElement('span');el.className='project-sticker'+(mini?' mac-sticker':'');el.dataset.sticker=key;if(mini)el.setAttribute('aria-hidden','true');else{el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Move sticker; double-click or press Enter to collect it');}
- if(key[0]==='W'){
+ const mobileSource=window.PORTFOLIO_MOBILE_QUERY.matches?window.PORTFOLIO_PHONE_STICKERS?.[key]:null;
+ if(mobileSource){if(key[0]==='W')el.classList.add('sticker-wolf');el.style.backgroundImage=`url("${mobileSource}")`;el.style.backgroundSize='100% 100%';el.style.backgroundPosition='50% 50%';}
+ else if(key[0]==='W'){
   const variant=Number(key.slice(1));el.classList.add('sticker-wolf');el.style.backgroundImage=`url("${window.portfolioImageSource('assets/wolfy-spritesheet.png','tile')}")`;el.style.backgroundSize='800% 1100%';el.style.backgroundPosition=variant===1?'0% 50%':variant===2?'28.5714% 30%':'0% 0%';
  }else{
   const index=Number(key.slice(1));el.style.backgroundImage=`url("${window.portfolioImageSource(STICKER_ATLASES[key[0]],'tile')}")`;el.style.backgroundSize='400% 400%';el.style.backgroundPosition=`${index%4/3*100}% ${Math.floor(index/4)/3*100}%`;
@@ -32,9 +34,11 @@ function stickerElement(key,mini=false){
  const art=document.createElement('span');art.className='sticker-art';
  el.style.setProperty('--sticker-image',el.style.backgroundImage);el.style.setProperty('--sticker-bg-size',el.style.backgroundSize);el.style.setProperty('--sticker-bg-position',el.style.backgroundPosition);el.style.backgroundImage='none';el.append(art);
  const shine=()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;el.classList.remove('is-sticker-shining');void el.offsetWidth;el.classList.add('is-sticker-shining');};
+ if(!window.PORTFOLIO_MOBILE_QUERY.matches){
  el.addEventListener('pointerenter',e=>{if(e.pointerType==='touch')return;el.classList.add('is-sticker-hover');shine();});
  el.addEventListener('pointermove',e=>{if(e.pointerType==='touch'||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=el.getBoundingClientRect(),x=Math.max(-.5,Math.min(.5,(e.clientX-r.left)/r.width-.5)),y=Math.max(-.5,Math.min(.5,(e.clientY-r.top)/r.height-.5));el.style.setProperty('--sticker-tilt-x',(-y*10)+'deg');el.style.setProperty('--sticker-tilt-y',(x*10)+'deg');});
  el.addEventListener('pointerleave',()=>{el.classList.remove('is-sticker-hover');el.style.removeProperty('--sticker-tilt-x');el.style.removeProperty('--sticker-tilt-y');});
+ }
  el.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();shine();});
  if(!mini)enableStickerDrag(el);el.addEventListener('dblclick',event=>{event.preventDefault();event.stopPropagation();openStickerToken(key,el);});
  el.addEventListener('animationend',event=>{if(event.animationName==='sticker-sheen')el.classList.remove('is-sticker-shining');});

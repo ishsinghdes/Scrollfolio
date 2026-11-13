@@ -48,3 +48,20 @@ body{transition:none}#atmosphere{transition:none}.resume-section h2,.resume-sect
 }
 
 .focused-frame{position:relative}
+
+/* Phone revision 2: discard hidden homepage graphics, and use a flat project camera.
+   None of these rules change desktop rendering. */
+@media(max-width:759px),(hover:none) and (pointer:coarse){
+ .project-open>main,.project-open>header{display:none!important}
+ .canvas-viewport{perspective:none}
+ .canvas-world{will-change:auto;transform-style:flat}
+ .sticker-art{transform:none!important;will-change:auto}
+ .sticker-art:after{display:none}
+ .is-sticker-shining .sticker-art:after{display:block}
+ .sleeve{will-change:auto}
+ .canvas-tile[data-media-state="waiting"] .mobile-media-state:after{content:'Loading…'}
+ .phone-check-flat #atmosphere:before{animation:none!important}
+ .phone-check-flat .sleeve-library,.phone-check-flat .sleeve-track,.phone-check-flat .canvas-viewport{perspective:none!important}
+ .phone-check-flat .project-sticker,.phone-check-flat .project-sticker *, .phone-check-flat .sleeve,.phone-check-flat .sleeve-face,.phone-check-flat .v2-top,.phone-check-flat .journey-nav,.phone-check-flat .project-link-trigger{filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;will-change:auto!important}
+ .phone-check-flat .sticker-art:after,.phone-check-flat .sleeve-face:after{display:none!important}
+}
