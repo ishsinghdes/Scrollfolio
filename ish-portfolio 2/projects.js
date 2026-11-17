@@ -500,7 +500,7 @@ window.PROJECTS = [
   {
     "id": "audio-visualizer-3d-ui-ux",
     "name": "Audio Visualizer",
-    "description": "A 444 Records site showcasing UDNH, their music and creative work through an immersive audio visualizer.",
+    "description": "A 444 Records site showcasing Yudee & Ish Singh, their music and creative work through an immersive audio visualizer.",
     "tags": [
       "UI/UX",
       "3D",
@@ -523,7 +523,7 @@ window.PROJECTS = [
     },
     "sourceUrl": "https://ishsinghdes.github.io/444label/",
     "aim": "A modern audio visualizer and a space for artists to share their music and creative work.",
-    "direction": "A modern, space-inspired experience built around immersive audio and visuals.",
+    "direction": "",
     "tools": "Figma, Codex, AI, Java, image rendering, prompt engineering and AI methodologies.",
     "category": "UI/UX Design",
     "halo": "#b2a9d8",
