@@ -1,6 +1,7 @@
 /* Project journeys and ambient field by Ish Singh. Media keeps stable world coordinates. */
 'use strict';
 const themes={
+ 'hospital-management-system':['#0b2418','#ecf8ef','#70dc98'],
  'nexa-enhanced-digital-experience':['#090c12','#f0f4fa','#ffffff'],
  'good-money-personal-finance':['#f3bd76','#342314','#f37518'],
  'bharat-crypto-digital-assets':['#ffffff','#28251d','#c99b29'],

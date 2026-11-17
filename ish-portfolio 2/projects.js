@@ -1,5 +1,48 @@
-// Portfolio project data.
+// Portfolio project data. Hospital interface concept and capture direction by Ish Singh.
 window.PROJECTS = [
+  {
+    "id": "hospital-management-system",
+    "name": "Hospital Management System",
+    "description": "A spatial hospital dashboard for patient care, room capacity, pharmacy stock and daily operations.",
+    "tags": [
+      "UI/UX",
+      "HEALTHCARE",
+      "SPATIAL DESIGN"
+    ],
+    "hero": "assets/hospital-management-system/01-spatial-command-center.webp",
+    "icon": "",
+    "iconAsset": "assets/hospital-management-system/hospital.svg",
+    "accent": "#0AAB2A",
+    "halo": "#5eae7c",
+    "markerColor": "#12663d",
+    "markerInk": "#ffffff",
+    "screenshots": [
+      "assets/hospital-management-system/01-spatial-command-center.webp",
+      "assets/hospital-management-system/02-room-care-card.webp",
+      "assets/hospital-management-system/03-pharmacy-inventory.webp",
+      "assets/hospital-management-system/04-operational-reports.webp",
+      "assets/hospital-management-system/05-mobile-spatial-plan.webp",
+      "assets/hospital-management-system/06-mobile-patient-register.webp",
+      "assets/hospital-management-system/07-mobile-beds-and-rooms.webp",
+      "assets/hospital-management-system/08-mobile-sign-in.webp",
+      "assets/hospital-management-system/09-plan-perspective.mp4",
+      "assets/hospital-management-system/10-room-hover-and-care.mp4",
+      "assets/hospital-management-system/11-floor-theme-and-focus.mp4",
+      "assets/hospital-management-system/12-calendar-staff-and-insights.mp4"
+    ],
+    "layout": 0,
+    "links": {
+      "website": "https://ishsinghdes.github.io/hospital-management-system/",
+      "github": "https://github.com/ishsinghdes/hospital-management-system",
+      "behance": null,
+      "integration": null
+    },
+    "sourceUrl": "https://ishsinghdes.github.io/hospital-management-system/",
+    "aim": "Bring hospital operations into a readable spatial workspace, with the floor plan at its center and metrics available when needed.",
+    "direction": "An interactive U-shaped WebGL floor connects rooms, patients, pharmacy and staff. Dark charcoal surfaces and hospital green support focused work; responsive layouts preserve the plan and its controls on mobile. Explore the gallery for four-second interaction studies and four mobile screens.",
+    "tools": "HTML · CSS · JavaScript · Three.js / WebGL",
+    "category": "UI/UX Design"
+  },
   {
     "id": "car-analytics",
     "name": "Car Analytics",

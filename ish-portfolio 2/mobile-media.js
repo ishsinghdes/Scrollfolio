@@ -9,3 +9,71 @@ window.portfolioImageSource=function(src,role='thumb'){
 
 // Individual mobile cutouts avoid full-sheet masks on every sticker.
 window.PORTFOLIO_PHONE_STICKERS={"M0":"assets/mobile/sticker-cells/M/M0.webp","M1":"assets/mobile/sticker-cells/M/M1.webp","M2":"assets/mobile/sticker-cells/M/M2.webp","M3":"assets/mobile/sticker-cells/M/M3.webp","M4":"assets/mobile/sticker-cells/M/M4.webp","M5":"assets/mobile/sticker-cells/M/M5.webp","M6":"assets/mobile/sticker-cells/M/M6.webp","M7":"assets/mobile/sticker-cells/M/M7.webp","M8":"assets/mobile/sticker-cells/M/M8.webp","M9":"assets/mobile/sticker-cells/M/M9.webp","M10":"assets/mobile/sticker-cells/M/M10.webp","M11":"assets/mobile/sticker-cells/M/M11.webp","M12":"assets/mobile/sticker-cells/M/M12.webp","M13":"assets/mobile/sticker-cells/M/M13.webp","M14":"assets/mobile/sticker-cells/M/M14.webp","M15":"assets/mobile/sticker-cells/M/M15.webp","F0":"assets/mobile/sticker-cells/F/F0.webp","F1":"assets/mobile/sticker-cells/F/F1.webp","F2":"assets/mobile/sticker-cells/F/F2.webp","F3":"assets/mobile/sticker-cells/F/F3.webp","F4":"assets/mobile/sticker-cells/F/F4.webp","F5":"assets/mobile/sticker-cells/F/F5.webp","F6":"assets/mobile/sticker-cells/F/F6.webp","F7":"assets/mobile/sticker-cells/F/F7.webp","F8":"assets/mobile/sticker-cells/F/F8.webp","F9":"assets/mobile/sticker-cells/F/F9.webp","F10":"assets/mobile/sticker-cells/F/F10.webp","F11":"assets/mobile/sticker-cells/F/F11.webp","F12":"assets/mobile/sticker-cells/F/F12.webp","F13":"assets/mobile/sticker-cells/F/F13.webp","F14":"assets/mobile/sticker-cells/F/F14.webp","F15":"assets/mobile/sticker-cells/F/F15.webp","P0":"assets/mobile/sticker-cells/P/P0.webp","P1":"assets/mobile/sticker-cells/P/P1.webp","P2":"assets/mobile/sticker-cells/P/P2.webp","P3":"assets/mobile/sticker-cells/P/P3.webp","P4":"assets/mobile/sticker-cells/P/P4.webp","P5":"assets/mobile/sticker-cells/P/P5.webp","P6":"assets/mobile/sticker-cells/P/P6.webp","P7":"assets/mobile/sticker-cells/P/P7.webp","P8":"assets/mobile/sticker-cells/P/P8.webp","P9":"assets/mobile/sticker-cells/P/P9.webp","P10":"assets/mobile/sticker-cells/P/P10.webp","P11":"assets/mobile/sticker-cells/P/P11.webp","P12":"assets/mobile/sticker-cells/P/P12.webp","P13":"assets/mobile/sticker-cells/P/P13.webp","P14":"assets/mobile/sticker-cells/P/P14.webp","P15":"assets/mobile/sticker-cells/P/P15.webp","W0":"assets/mobile/sticker-cells/W/W0.webp","W1":"assets/mobile/sticker-cells/W/W1.webp","W2":"assets/mobile/sticker-cells/W/W2.webp"};
+
+// Responsive hospital capture sources; preserve the native mobile loading budget.
+Object.assign(window.PORTFOLIO_VARIANTS, {
+  "assets/hospital-management-system/01-spatial-command-center.webp": {
+    "width": 3200,
+    "height": 2000,
+    "thumb": "assets/hospital-management-system/mobile/01-spatial-command-center-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/01-spatial-command-center-tile.webp"
+  },
+  "assets/hospital-management-system/02-room-care-card.webp": {
+    "width": 3200,
+    "height": 2000,
+    "thumb": "assets/hospital-management-system/mobile/02-room-care-card-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/02-room-care-card-tile.webp"
+  },
+  "assets/hospital-management-system/03-pharmacy-inventory.webp": {
+    "width": 3200,
+    "height": 2000,
+    "thumb": "assets/hospital-management-system/mobile/03-pharmacy-inventory-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/03-pharmacy-inventory-tile.webp"
+  },
+  "assets/hospital-management-system/04-operational-reports.webp": {
+    "width": 3200,
+    "height": 3144,
+    "thumb": "assets/hospital-management-system/mobile/04-operational-reports-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/04-operational-reports-tile.webp"
+  },
+  "assets/hospital-management-system/05-mobile-spatial-plan.webp": {
+    "width": 860,
+    "height": 2080,
+    "thumb": "assets/hospital-management-system/mobile/05-mobile-spatial-plan-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/05-mobile-spatial-plan-tile.webp"
+  },
+  "assets/hospital-management-system/06-mobile-patient-register.webp": {
+    "width": 860,
+    "height": 1864,
+    "thumb": "assets/hospital-management-system/mobile/06-mobile-patient-register-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/06-mobile-patient-register-tile.webp"
+  },
+  "assets/hospital-management-system/07-mobile-beds-and-rooms.webp": {
+    "width": 860,
+    "height": 1864,
+    "thumb": "assets/hospital-management-system/mobile/07-mobile-beds-and-rooms-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/07-mobile-beds-and-rooms-tile.webp"
+  },
+  "assets/hospital-management-system/08-mobile-sign-in.webp": {
+    "width": 860,
+    "height": 1864,
+    "thumb": "assets/hospital-management-system/mobile/08-mobile-sign-in-thumb.webp",
+    "tile": "assets/hospital-management-system/mobile/08-mobile-sign-in-tile.webp"
+  },
+  "assets/hospital-management-system/09-plan-perspective.mp4": {
+    "width": 1600,
+    "height": 1000
+  },
+  "assets/hospital-management-system/10-room-hover-and-care.mp4": {
+    "width": 1600,
+    "height": 1000
+  },
+  "assets/hospital-management-system/11-floor-theme-and-focus.mp4": {
+    "width": 1600,
+    "height": 1000
+  },
+  "assets/hospital-management-system/12-calendar-staff-and-insights.mp4": {
+    "width": 1600,
+    "height": 1000
+  }
+});

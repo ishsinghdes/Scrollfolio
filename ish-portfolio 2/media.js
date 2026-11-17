@@ -265,3 +265,61 @@ window.PORTFOLIO_MEDIA_DETAILS = {
     "poster": "assets/additions/audio-visualizer-3d-ui-ux/added-motion-04.mp4.jpg"
   }
 };
+
+// Authentic Hospital Management System media by Ish Singh.
+window.PORTFOLIO_MEDIA["hospital-management-system"] = [
+  "assets/hospital-management-system/01-spatial-command-center.webp",
+  "assets/hospital-management-system/02-room-care-card.webp",
+  "assets/hospital-management-system/03-pharmacy-inventory.webp",
+  "assets/hospital-management-system/04-operational-reports.webp",
+  "assets/hospital-management-system/05-mobile-spatial-plan.webp",
+  "assets/hospital-management-system/06-mobile-patient-register.webp",
+  "assets/hospital-management-system/07-mobile-beds-and-rooms.webp",
+  "assets/hospital-management-system/08-mobile-sign-in.webp",
+  "assets/hospital-management-system/09-plan-perspective.mp4",
+  "assets/hospital-management-system/10-room-hover-and-care.mp4",
+  "assets/hospital-management-system/11-floor-theme-and-focus.mp4",
+  "assets/hospital-management-system/12-calendar-staff-and-insights.mp4"
+];
+Object.assign(window.PORTFOLIO_MEDIA_DETAILS, {
+  "assets/hospital-management-system/01-spatial-command-center.webp": {
+    "caption": "Spatial command center · WebGL hospital floor"
+  },
+  "assets/hospital-management-system/02-room-care-card.webp": {
+    "caption": "Room selection · Patient care and facilities"
+  },
+  "assets/hospital-management-system/03-pharmacy-inventory.webp": {
+    "caption": "Pharmacy · Inventory and stock readiness"
+  },
+  "assets/hospital-management-system/04-operational-reports.webp": {
+    "caption": "Reports · Capacity, patient flow, care and stock"
+  },
+  "assets/hospital-management-system/05-mobile-spatial-plan.webp": {
+    "caption": "Mobile · Edge-to-edge interactive floor plan"
+  },
+  "assets/hospital-management-system/06-mobile-patient-register.webp": {
+    "caption": "Mobile · Patient register and admissions"
+  },
+  "assets/hospital-management-system/07-mobile-beds-and-rooms.webp": {
+    "caption": "Mobile · Beds and rooms in light mode"
+  },
+  "assets/hospital-management-system/08-mobile-sign-in.webp": {
+    "caption": "Mobile · Hospital workspace sign-in"
+  },
+  "assets/hospital-management-system/09-plan-perspective.mp4": {
+    "caption": "3D to 2D · A continuous camera transition",
+    "poster": "assets/hospital-management-system/posters/09-plan-perspective.webp"
+  },
+  "assets/hospital-management-system/10-room-hover-and-care.mp4": {
+    "caption": "Hover, select and inspect · Care and facilities",
+    "poster": "assets/hospital-management-system/posters/10-room-hover-and-care.webp"
+  },
+  "assets/hospital-management-system/11-floor-theme-and-focus.mp4": {
+    "caption": "Floors, focus mode and light-to-dark transition",
+    "poster": "assets/hospital-management-system/posters/11-floor-theme-and-focus.webp"
+  },
+  "assets/hospital-management-system/12-calendar-staff-and-insights.mp4": {
+    "caption": "Care insights, calendar and staff · Fluid navigation",
+    "poster": "assets/hospital-management-system/posters/12-calendar-staff-and-insights.webp"
+  }
+});

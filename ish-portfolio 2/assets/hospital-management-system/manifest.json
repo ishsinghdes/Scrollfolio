@@ -1,0 +1,94 @@
+{
+  "project": "Hospital Management System",
+  "discipline": "UI/UX",
+  "media": [
+    {
+      "file": "01-spatial-command-center.webp",
+      "type": "screenshot",
+      "width": 3200,
+      "height": 2000,
+      "caption": "Spatial command center \u00b7 WebGL hospital floor"
+    },
+    {
+      "file": "02-room-care-card.webp",
+      "type": "screenshot",
+      "width": 3200,
+      "height": 2000,
+      "caption": "Room selection \u00b7 Patient care and facilities"
+    },
+    {
+      "file": "03-pharmacy-inventory.webp",
+      "type": "screenshot",
+      "width": 3200,
+      "height": 2000,
+      "caption": "Pharmacy \u00b7 Inventory and stock readiness"
+    },
+    {
+      "file": "04-operational-reports.webp",
+      "type": "screenshot",
+      "width": 3200,
+      "height": 3144,
+      "caption": "Reports \u00b7 Capacity, patient flow, care and stock"
+    },
+    {
+      "file": "05-mobile-spatial-plan.webp",
+      "type": "screenshot",
+      "width": 860,
+      "height": 2080,
+      "caption": "Mobile \u00b7 Edge-to-edge interactive floor plan"
+    },
+    {
+      "file": "06-mobile-patient-register.webp",
+      "type": "screenshot",
+      "width": 860,
+      "height": 1864,
+      "caption": "Mobile \u00b7 Patient register and admissions"
+    },
+    {
+      "file": "07-mobile-beds-and-rooms.webp",
+      "type": "screenshot",
+      "width": 860,
+      "height": 1864,
+      "caption": "Mobile \u00b7 Beds and rooms in light mode"
+    },
+    {
+      "file": "08-mobile-sign-in.webp",
+      "type": "screenshot",
+      "width": 860,
+      "height": 1864,
+      "caption": "Mobile \u00b7 Hospital workspace sign-in"
+    },
+    {
+      "file": "09-plan-perspective.mp4",
+      "type": "motion",
+      "duration": 4,
+      "width": 1600,
+      "height": 1000,
+      "caption": "3D to 2D \u00b7 A continuous camera transition"
+    },
+    {
+      "file": "10-room-hover-and-care.mp4",
+      "type": "motion",
+      "duration": 4,
+      "width": 1600,
+      "height": 1000,
+      "caption": "Hover, select and inspect \u00b7 Care and facilities"
+    },
+    {
+      "file": "11-floor-theme-and-focus.mp4",
+      "type": "motion",
+      "duration": 4,
+      "width": 1600,
+      "height": 1000,
+      "caption": "Floors, focus mode and light-to-dark transition"
+    },
+    {
+      "file": "12-calendar-staff-and-insights.mp4",
+      "type": "motion",
+      "duration": 4,
+      "width": 1600,
+      "height": 1000,
+      "caption": "Care insights, calendar and staff \u00b7 Fluid navigation"
+    }
+  ]
+}
