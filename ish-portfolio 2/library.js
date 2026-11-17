@@ -6,7 +6,7 @@ const libraryEntries=[null,...projects],entryCount=libraryEntries.length;
 const wrapEntry=n=>((n%entryCount)+entryCount)%entryCount;
 let libraryPosition=projectDialog.open?selected+1:0,libraryTarget=libraryPosition,libraryRaf=0,librarySnap=0,libraryDrag=null,libraryOpening=false,libraryInternalSelect=false,libraryEntry=-1;
 let libraryEntering=false;
-let sleeveWidth=216,sleeveHeight=233,libraryMoved=false,libraryPointerClickUntil=0;
+let sleeveWidth=216,sleeveHeight=233,sleevePerspective=1100,sleeveOffsets=[],libraryMoved=false,libraryPointerClickUntil=0;
 const sleeves=Array.from({length:13},()=>{
  const b=document.createElement('button');b.type='button';b.className='sleeve';b.innerHTML='<span class="sleeve-face"><span class="sleeve-loading-surface" aria-hidden="true"></span><span class="sleeve-label"><span class="sleeve-icon"></span><span class="sleeve-title"></span></span><span class="sleeve-picture"></span><span class="sleeve-greeting"></span></span>';sleeveTrack.append(b);
  b.addEventListener('click',e=>{if(libraryOpening||libraryMoved||(e.detail>0&&performance.now()<libraryPointerClickUntil))return;chooseSleeve(Number(b.dataset.entry));});return b;
@@ -56,16 +56,39 @@ function commitLibraryEntry(n){
  }
  $('library-status').textContent=p?`${p.name}. ${n+1} of ${entryCount}.`:`Ish Singh. Introduction. 1 of ${entryCount}.`;
 }
+function sleevePose(distance){
+ const scale=(1-Math.min(.30,distance*.085))*(1-.2*Math.min(1,distance)**2*(3-2*Math.min(1,distance)));
+ return {angle:-Math.min(72,distance*52),scale,z:-Math.min(110,distance*23)};
+}
+function spaceSleeves(){
+ // Lay out the visible edges after perspective, so narrowing covers cannot create uneven gaps.
+ sleeveOffsets=[0,sleeveWidth*.83*.74];
+ for(let distance=2;distance<=7;distance++){
+  const previous=sleevePose(distance-1),next=sleevePose(distance);
+  const ph=sleeveWidth*previous.scale/2,nh=sleeveWidth*next.scale/2;
+  const pa=previous.angle*Math.PI/180,na=next.angle*Math.PI/180;
+  const previousRight=(sleeveOffsets[distance-1]+Math.cos(pa)*ph)/(1-(previous.z-Math.sin(pa)*ph)/sleevePerspective);
+  const gap=sleeveWidth*(.055+.045*(distance-2));
+  sleeveOffsets[distance]=(previousRight+gap)*(1-(next.z+Math.sin(na)*nh)/sleevePerspective)+Math.cos(na)*nh;
+ }
+}
+function sleeveOffset(distance){
+ if(distance<=1)return distance*sleeveOffsets[1];
+ const i=Math.min(6,Math.floor(distance)),t=distance-i,t2=t*t,t3=t2*t;
+ const start=sleeveOffsets[i],end=sleeveOffsets[i+1];
+ const incoming=i===1?sleeveOffsets[1]:(end-sleeveOffsets[i-1])/2;
+ const outgoing=i===6?end-start:(sleeveOffsets[i+2]-start)/2;
+ return (2*t3-3*t2+1)*start+(t3-2*t2+t)*incoming+(-2*t3+3*t2)*end+(t3-t2)*outgoing;
+}
 function paintLibrary(){
- const center=Math.round(libraryPosition),step=Math.min(sleeveWidth*.8,Math.max(sleeveWidth*.22,innerWidth*.105));
+ const center=Math.round(libraryPosition);
  for(let offset=-6;offset<=6;offset++){
   const absolute=center+offset,b=sleeves[((absolute%sleeves.length)+sleeves.length)%sleeves.length],d=absolute-libraryPosition,a=Math.abs(d),sign=Math.sign(d),n=wrapEntry(absolute);
   setSleeveArtwork(b,n);
-  const x=.74*(a<1?d*sleeveWidth*.83:sign*(sleeveWidth*.83+step*Math.pow(a-1,.78)));
-  const angle=-sign*Math.min(72,a*52),scale=(1-Math.min(.30,a*.085))*(1-.2*Math.min(1,a)**2*(3-2*Math.min(1,a))),z=-Math.min(110,a*23);
+  const x=sign*sleeveOffset(a),pose=sleevePose(a),angle=sign*pose.angle,{scale,z}=pose;
   b.style.transform=mobileExperience.matches&&window.PORTFOLIO_PHONE_CHECK?.flat?`translate(-50%,-50%) translate(${x}px,${sleeveHeight*(1-scale)/2}px) scale(${scale})`:`translate(-50%,-50%) translate3d(${x}px,${sleeveHeight*(1-scale)/2}px,${z}px) rotateY(${angle}deg) scale(${scale})`;
-  b.style.zIndex=String(10000-Math.round(a*1000)+(absolute===center?1:0));const edge=Math.max(0,Math.min(1,(5.65-a)/.65));b.style.opacity=String(edge*(libraryEntering?Math.max(.24,1-a*.14):1));const grey=Math.round(174+Math.min(5,a)*11);b.style.setProperty('--loading-tone',`rgb(${grey},${grey},${grey})`);
-  const active=n===wrapEntry(center);b.classList.toggle('sleeve-selected',active);b.tabIndex=active?0:-1;b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-hidden',String(a>5.65));b.style.pointerEvents=a>5.65?'none':'';
+  b.style.zIndex=String(10000-Math.round(a*1000)+(absolute===center?1:0));const edge=Math.max(0,Math.min(1,6-a)),fade=Math.exp(-.075*Math.pow(Math.max(0,a-1),1.65))*edge*edge*(3-2*edge);b.style.opacity=String(fade*(libraryEntering?Math.max(.24,1-a*.14):1));const grey=Math.round(174+Math.min(5,a)*11);b.style.setProperty('--loading-tone',`rgb(${grey},${grey},${grey})`);
+  const active=n===wrapEntry(center);b.classList.toggle('sleeve-selected',active);b.tabIndex=active?0:-1;b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-hidden',String(a>=6));b.style.pointerEvents=a>=6?'none':'';
   b.setAttribute('aria-label',libraryEntries[n]?`${active?'Open':'Select'} ${libraryEntries[n].name}`:`${active?'About':'Select'} Ish Singh`);
  }
  if(!libraryEntering)commitLibraryEntry(wrapEntry(center));
@@ -87,6 +110,7 @@ function goLibrary(n){
 }
 function sizeLibrary(){
  sleeveHeight=innerWidth<600?225:233;sleeveWidth=innerWidth<600?206:216;
+ sleevePerspective=parseFloat(getComputedStyle(sleeveTrack).perspective)||1100;spaceSleeves();
  library.style.setProperty('--sleeve-width',sleeveWidth+'px');library.style.setProperty('--sleeve-height',sleeveHeight+'px');paintLibrary();
 }
 // Static, immediately readable copy replaces the previous typewriter/icon-rail machinery.
