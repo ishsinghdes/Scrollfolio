@@ -1,6 +1,48 @@
 // Portfolio project data. Hospital interface concept and capture direction by Ish Singh.
 window.PROJECTS = [
   {
+  "id": "personal-finance-ai",
+  "name": "Personal Finance AI",
+  "description": "Money.me brings subscriptions, recurring bills and cash-flow forecasts into one personal finance experience.",
+  "tags": [
+    "UI/UX",
+    "FINTECH",
+    "PREDICTIVE AI"
+  ],
+  "hero": "assets/personal-finance-ai/01-everything-together.webp",
+  "sleeveHero": "assets/personal-finance-ai/honeycomb-cover.svg",
+  "icon": "",
+  "iconAsset": "assets/personal-finance-ai/rupee-coin.svg",
+  "accent": "#ed5363",
+  "halo": "#9f414b",
+  "markerColor": "#ba3142",
+  "markerInk": "#ffffff",
+  "screenshots": [
+    "assets/personal-finance-ai/01-everything-together.webp",
+    "assets/personal-finance-ai/02-commitment-and-control.webp",
+    "assets/personal-finance-ai/03-insights-and-consumption.webp",
+    "assets/personal-finance-ai/04-plan-your-next-months.webp",
+    "assets/personal-finance-ai/05-honeycomb-home.webp",
+    "assets/personal-finance-ai/06-subscription-value.webp",
+    "assets/personal-finance-ai/07-spending-chart.webp",
+    "assets/personal-finance-ai/08-your-controls.webp",
+    "assets/personal-finance-ai/09-welcome-motion.mp4",
+    "assets/personal-finance-ai/10-home-arrival.mp4"
+  ],
+  "layout": 0,
+  "links": {
+    "website": "https://ishsinghdes.github.io/money.me/",
+    "github": "https://github.com/ishsinghdes/money.me",
+    "behance": null,
+    "integration": null
+  },
+  "sourceUrl": "https://ishsinghdes.github.io/money.me/",
+  "aim": "Help young professionals in Indian Tier 1 cities see what they pay for, understand recurring commitments and plan the money they will have next.",
+  "direction": "A balanced, pannable honeycomb makes every service recognizable. Contextual sheets connect usage, renewals and management; dated forecasts include annual bills and a living-cost reduction control. Charcoal surfaces, brand colours and floating liquid glass keep the experience focused. The interactive concept uses illustrative financial inputs, with no live bank, email or device-usage connection.",
+  "tools": "React \u00b7 TypeScript \u00b7 CSS \u00b7 Interactive forecasting",
+  "category": "UI/UX Design"
+},
+  {
     "id": "hospital-management-system",
     "name": "Hospital Management System",
     "description": "A spatial hospital dashboard for patient care, room capacity, pharmacy stock and daily operations.",
