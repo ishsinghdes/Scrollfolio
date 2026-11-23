@@ -323,3 +323,40 @@ Object.assign(window.PORTFOLIO_MEDIA_DETAILS, {
     "poster": "assets/hospital-management-system/posters/12-calendar-staff-and-insights.webp"
   }
 });
+
+// Money.me — original interface captures and motion by Ish Singh.
+window.PORTFOLIO_MEDIA["personal-finance-ai"]=["assets/personal-finance-ai/01-everything-together.webp", "assets/personal-finance-ai/02-commitment-and-control.webp", "assets/personal-finance-ai/03-insights-and-consumption.webp", "assets/personal-finance-ai/04-plan-your-next-months.webp", "assets/personal-finance-ai/05-honeycomb-home.webp", "assets/personal-finance-ai/06-subscription-value.webp", "assets/personal-finance-ai/07-spending-chart.webp", "assets/personal-finance-ai/08-your-controls.webp", "assets/personal-finance-ai/09-welcome-motion.mp4", "assets/personal-finance-ai/10-home-arrival.mp4"];
+Object.assign(window.PORTFOLIO_MEDIA_DETAILS,{
+  "assets/personal-finance-ai/01-everything-together.webp": {
+    "caption": "Your money, all together \u00b7 Welcome, honeycomb and All apps"
+  },
+  "assets/personal-finance-ai/02-commitment-and-control.webp": {
+    "caption": "From commitment to control \u00b7 Usage, renewals and subscription edits"
+  },
+  "assets/personal-finance-ai/03-insights-and-consumption.webp": {
+    "caption": "Personal insights \u00b7 Benefits, consumption and discovery"
+  },
+  "assets/personal-finance-ai/04-plan-your-next-months.webp": {
+    "caption": "A little foresight \u00b7 Dated cash flow and living-cost reduction"
+  },
+  "assets/personal-finance-ai/05-honeycomb-home.webp": {
+    "caption": "One balanced honeycomb \u00b7 One selected service"
+  },
+  "assets/personal-finance-ai/06-subscription-value.webp": {
+    "caption": "Make the most of a subscription \u00b7 Usage and discovery"
+  },
+  "assets/personal-finance-ai/07-spending-chart.webp": {
+    "caption": "Where your month goes \u00b7 Interactive spending breakdown"
+  },
+  "assets/personal-finance-ai/08-your-controls.webp": {
+    "caption": "Your accounts, permissions and preferences"
+  },
+  "assets/personal-finance-ai/09-welcome-motion.mp4": {
+    "caption": "Welcome to Money.me \u00b7 Floating app bubbles",
+    "poster": "assets/personal-finance-ai/posters/09-welcome-motion.webp"
+  },
+  "assets/personal-finance-ai/10-home-arrival.mp4": {
+    "caption": "From welcome to Home \u00b7 Apps arrive, then the glass controls",
+    "poster": "assets/personal-finance-ai/posters/10-home-arrival.webp"
+  }
+});

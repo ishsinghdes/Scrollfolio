@@ -77,3 +77,74 @@ Object.assign(window.PORTFOLIO_VARIANTS, {
     "height": 1000
   }
 });
+
+Object.assign(window.PORTFOLIO_VARIANTS,{
+  "assets/personal-finance-ai/01-everything-together.webp": {
+    "width": 1900,
+    "height": 1200,
+    "thumb": "assets/personal-finance-ai/mobile/01-everything-together-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/01-everything-together-tile.webp"
+  },
+  "assets/personal-finance-ai/02-commitment-and-control.webp": {
+    "width": 1900,
+    "height": 1200,
+    "thumb": "assets/personal-finance-ai/mobile/02-commitment-and-control-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/02-commitment-and-control-tile.webp"
+  },
+  "assets/personal-finance-ai/03-insights-and-consumption.webp": {
+    "width": 1900,
+    "height": 1200,
+    "thumb": "assets/personal-finance-ai/mobile/03-insights-and-consumption-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/03-insights-and-consumption-tile.webp"
+  },
+  "assets/personal-finance-ai/04-plan-your-next-months.webp": {
+    "width": 1900,
+    "height": 1200,
+    "thumb": "assets/personal-finance-ai/mobile/04-plan-your-next-months-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/04-plan-your-next-months-tile.webp"
+  },
+  "assets/personal-finance-ai/05-honeycomb-home.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/05-honeycomb-home-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/05-honeycomb-home-tile.webp"
+  },
+  "assets/personal-finance-ai/06-subscription-value.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/06-subscription-value-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/06-subscription-value-tile.webp"
+  },
+  "assets/personal-finance-ai/07-spending-chart.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/07-spending-chart-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/07-spending-chart-tile.webp"
+  },
+  "assets/personal-finance-ai/08-your-controls.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/08-your-controls-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/08-your-controls-tile.webp"
+  },
+  "assets/personal-finance-ai/posters/09-welcome-motion.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/09-welcome-motion-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/09-welcome-motion-tile.webp"
+  },
+  "assets/personal-finance-ai/posters/10-home-arrival.webp": {
+    "width": 390,
+    "height": 844,
+    "thumb": "assets/personal-finance-ai/mobile/10-home-arrival-thumb.webp",
+    "tile": "assets/personal-finance-ai/mobile/10-home-arrival-tile.webp"
+  },
+  "assets/personal-finance-ai/09-welcome-motion.mp4": {
+    "width": 390,
+    "height": 844
+  },
+  "assets/personal-finance-ai/10-home-arrival.mp4": {
+    "width": 390,
+    "height": 844
+  }
+});

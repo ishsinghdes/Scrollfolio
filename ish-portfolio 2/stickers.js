@@ -5,6 +5,7 @@ const STICKER_NAMES={"M":["Tyre","Sports car","Blue car","Car key","Sun","Cloud"
 function stickerName(key){return key[0]==='W'?'Wolfy':STICKER_NAMES[key[0]]?.[Number(key.slice(1))]||'Sticker';}
 const STICKER_ATLASES={M:'assets/stickers/mobility-nature.png',F:'assets/stickers/creative-finance.png',P:'assets/stickers/postage-floral.png'};
 const PROJECT_STICKER_SETS={
+ 'personal-finance-ai':['F0','F8','F2','F3','F6','F9','P12','P10','P0','W0'],
  'hospital-management-system':['P12','P11','F6','F9','M7','F5','P7','M13','P0','W0'],
  'car-analytics':['M0','M2','M3','F3','F9','M14','P1','P8','P4','W0'],
  'maruti-suzuki-arena':['M2','M0','M3','M11','M4','F6','P2','P4','P10','W0'],
